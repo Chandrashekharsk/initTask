@@ -32,22 +32,27 @@ const Dashboard = () => {
       {loading ? (
         <h2 className="text-center text-lg text-gray-700">Loading...</h2>
       ) : customers.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {customers.map((customer) => (
-            <Row
-              key={customer._id}
-              email={customer.email}
-              firstName={customer.firstName}
-              lastName={customer.lastName}
-              company={customer.company}
-              city={customer.city}
-              country={customer.country}
-              phone1={customer.phone1}
-              phone2={customer.phone2}
-              subscriptionDate={customer.subscriptionDate}
-              website={customer.website}
-            />
-          ))}
+        <div className="overflow-x-auto">
+          <table className="table-auto w-full border-collapse border border-gray-300">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">Name</th>
+                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">Email</th>
+                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">Company</th>
+                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">City</th>
+                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">Country</th>
+                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">Phone 1</th>
+                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">Phone 2</th>
+                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">Subscription Date</th>
+                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">Website</th>
+              </tr>
+            </thead>
+            <tbody>
+              {customers.map((customer) => (
+                <Row key={customer._id} customer={customer} />
+              ))}
+            </tbody>
+          </table>
         </div>
       ) : (
         <h2 className="text-center text-lg text-gray-700">No customers found</h2>
