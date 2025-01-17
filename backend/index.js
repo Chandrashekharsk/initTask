@@ -17,11 +17,16 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
 const corsOptions = {
-  origin: process.env.FRONTEND_URL, 
+  origin: process.env.FRONTEND_URL,
   credentials: true, 
-  methods: "*",
-};
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], 
+  allowedHeaders: ["Content-Type", "Authorization"], 
+}
 app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  console.log("Frontend Origin:", req.headers.origin);
+  next();
+});
 
 app.use("/users", userRoutes); 
 app.get("/", (req, res) => {
